@@ -1,0 +1,20 @@
+{
+  "name": "webdriver-io-cli-poc",
+  "version": "1.0.0",
+  "description": "Webdriver.io testing framework POC using @wdio/cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "wdio"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wdio/cli": "^5.4.7",
+    "@wdio/local-runner": "^5.4.7",
+    "@wdio/mocha-framework": "^5.4.6",
+    "@wdio/spec-reporter": "^5.4.3",
+    "@wdio/sync": "^5.4.6",
+    "chai": "^4.2.0",
+    "webdriverio": "^5.4.7"
+  }
+}
