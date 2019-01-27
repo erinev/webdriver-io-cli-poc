@@ -1,3 +1,7 @@
+const chai = require('chai');
+const mkdirp = require('mkdirp');
+const rimraf = require('rimraf');
+
 exports.config = {
     runner: 'local',
     sync: true,
@@ -8,6 +12,7 @@ exports.config = {
     path: '/wd/hub',
 
     baseUrl: 'http://localhost',
+    failedTestsScreenshotDirectoryName: './failed-tests-screenshots',
 
     maxInstances: 1,
     capabilities: [
@@ -35,7 +40,9 @@ exports.config = {
 
     framework: 'mocha',
     mochaOpts: {
+        ui: 'bdd',
         timeout: 60 * 1000,
+        compilers: ['js:@babel/register']
     },
 
     reporters: ['spec'],
@@ -48,17 +55,21 @@ exports.config = {
      */
     before: function (capabilities, specs) {
         // Chai assertion lib initialization
-        const chai = require('chai');
         global.expect = chai.expect;
         chai.Should();
+
+        // Prepare failed tests screenshots folder
+        rimraf(this.failedTestsScreenshotDirectoryName, () => {});
+        mkdirp(this.failedTestsScreenshotDirectoryName, () => {})
     },
     /**
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
      * @param {Object} test test details
      */
     afterTest: function (test) {
+        // Take a screenshot of page after failed test
         if(!test.passed) {
-            browser.saveScreenshot(`./failed-tests-screenshots/${test.fullTitle}.png`);
+            browser.saveScreenshot(`${this.failedTestsScreenshotDirectoryName}/${test.fullTitle}.png`);
         }
     }
 }

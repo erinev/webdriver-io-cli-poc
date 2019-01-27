@@ -1,4 +1,3 @@
 /node_modules/
 /package-lock.json
-/failed-tests-screenshots/*
-!/failed-tests-screenshots/.gitkeep
+/failed-tests-screenshots/
