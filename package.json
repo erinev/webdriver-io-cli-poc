@@ -15,7 +15,6 @@
     "@wdio/spec-reporter": "5.4.3",
     "@wdio/sync": "5.4.6",
     "chai": "4.2.0",
-    "wdio-teamcity-reporter": "1.1.1",
     "webdriverio": "5.4.7"
   },
   "devDependencies": {

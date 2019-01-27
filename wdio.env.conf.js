@@ -1,10 +1,6 @@
 const args = require('yargs').argv;
 const config = require('./wdio.conf.js').config;
 
-if (args.teamcity) {
-    config.reporters = ['teamcity'];
-}
-
 if (args.username) {
     config.username = args.username;
 } else {
