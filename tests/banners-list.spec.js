@@ -1,12 +1,15 @@
-describe('Banners list page -', () => {
+const AdsOverviewPageClass = require('../page-objects/ads-overview-page');
+const AdsOverviewPage = new AdsOverviewPageClass();
+
+describe('Ads overview page -', () => {
 
     before(() => {
-        browser.url(`${browser.config.baseUrl}/AdsManagementUI`);
+        AdsOverviewPage.open();
     });
 
     it('should have correct title', () => {
-        const browserTitle = browser.getTitle();
+        const pageTitle = AdsOverviewPage.getTitle();
         
-        browserTitle.should.be.equal('Banners - Adform');
+        pageTitle.should.be.equal('Banners - Adform');
     });
 });

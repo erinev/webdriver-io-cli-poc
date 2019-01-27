@@ -2,6 +2,9 @@ const chai = require('chai');
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
 
+const LoginPageClass = require('./page-objects/login-page');
+const LoginPage = new LoginPageClass();
+
 exports.config = {
     runner: 'local',
     sync: true,
@@ -69,10 +72,7 @@ exports.config = {
         global.expect = chai.expect;
         chai.Should();
         
-        browser.url(`${browser.config.baseUrl}/passport`);
-        $('input[name="username"]').setValue(browser.config.username);
-        $('input[name="password"]').setValue(browser.config.password);
-        $('button.sign-in').click();
+        LoginPage.login(browser.config.username, browser.config.password);
     },
     /**
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
