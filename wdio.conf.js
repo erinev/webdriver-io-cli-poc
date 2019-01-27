@@ -48,6 +48,17 @@ exports.config = {
     reporters: ['spec'],
     
     /**
+     * Gets executed once before all workers get launched.
+     * @param {Object} config wdio configuration object
+     * @param {Array.<Object>} capabilities list of capabilities details
+     */
+    onPrepare: function (config, capabilities) {
+        // Prepare failed tests screenshots folder
+        rimraf.sync(config.failedTestsScreenshotDirectoryName);
+        mkdirp.sync(config.failedTestsScreenshotDirectoryName);
+        console.log(`Directory '${this.failedTestsScreenshotDirectoryName}' created!`);
+    },
+    /**
      * Gets executed before test execution begins. At this point you can access to all global
      * variables like `browser`. It is the perfect place to define custom commands.
      * @param {Array.<Object>} capabilities list of capabilities details
@@ -57,10 +68,8 @@ exports.config = {
         // Chai assertion lib initialization
         global.expect = chai.expect;
         chai.Should();
-
-        // Prepare failed tests screenshots folder
-        rimraf(this.failedTestsScreenshotDirectoryName, () => {});
-        mkdirp(this.failedTestsScreenshotDirectoryName, () => {})
+        
+        // TODO: login here
     },
     /**
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
