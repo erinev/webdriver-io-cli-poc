@@ -64,12 +64,15 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function (capabilities, specs) {
+    before: function (capabilities, specs) {        
         // Chai assertion lib initialization
         global.expect = chai.expect;
         chai.Should();
         
-        // TODO: login here
+        browser.url(`${browser.config.baseUrl}/passport`);
+        $('input[name="username"]').setValue(browser.config.username);
+        $('input[name="password"]').setValue(browser.config.password);
+        $('button.sign-in').click();
     },
     /**
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
